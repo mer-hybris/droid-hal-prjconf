@@ -1,0 +1,7 @@
+Prefer: libhybris-libGLESv2
+Prefer: libhybris-libGLESv2-devel
+Prefer: libhybris-libEGL
+Prefer: libhybris-libEGL-devel
+Prefer: libhybris-libwayland-egl-devel
+Prefer: libhybris-libwayland-egl
+
