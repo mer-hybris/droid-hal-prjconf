@@ -1,0 +1,7 @@
+droid-hal-prjconf
+Copyright (c) 2014 Jolla Ltd.
+Contact: Simonas Leleiva <simonas.leleiva@jollamobile.com>
+
+This package provides "project-config", which is picked up by Mer's custom
+script on OBS, to populate the package's "Project Config".
+
