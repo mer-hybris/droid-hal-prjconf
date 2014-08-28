@@ -8,3 +8,7 @@ Prefer: ngfd-settings-sailfish
 Prefer: profiled-settings-sailfish
 Prefer: droid-hal
 
+# We do not need ofono-configs in build time also as adaptation provides this
+# lets make sure we do not conflict with it in builds.
+Ignore: ofono:ofono-configs
+
