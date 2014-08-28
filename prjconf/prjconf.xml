@@ -6,4 +6,5 @@ Prefer: libhybris-libwayland-egl-devel
 Prefer: libhybris-libwayland-egl
 Prefer: ngfd-settings-sailfish
 Prefer: profiled-settings-sailfish
+Prefer: droid-hal
 
