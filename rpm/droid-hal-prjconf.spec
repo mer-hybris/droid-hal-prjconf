@@ -3,7 +3,7 @@ Summary:    Project configs for Droid HAL adaptations for OBS
 Version:    0
 Release:    1
 Group:      Configs
-License:    GPLv2
+License:    BSD-3-Clause
 Source0:    %{name}-%{version}.tar.bz2
 Provides:   project-config
 
