@@ -1,3 +1,5 @@
+# Generic project config section
+
 Prefer: libhybris-libGLESv2
 Prefer: libhybris-libGLESv2-devel
 Prefer: libhybris-libEGL

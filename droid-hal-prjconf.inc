@@ -14,15 +14,29 @@ Provides:   project-config
 %setup -q -n %{name}-%{version}
 
 %install
+CONFDIR=prjconf
+SUBMODULE=droid-hal-prjconf
+SRC_GENERIC=$SUBMODULE/$CONFDIR
+SRC_SPECIFIC=$CONFDIR
+DESTDIR=$RPM_BUILD_ROOT/%{_datadir}/$CONFDIR
+DEST=$DESTDIR/prjconf.xml
+
 rm -rf %{buildroot}
-DIR=$RPM_BUILD_ROOT/%{_datadir}/prjconf
-PRJCONF=$DIR/prjconf.xml
-mkdir -p $DIR
-cp -rf droid-hal-prjconf/prjconf/prjconf.xml $DIR
-if [ -e prjconf/device-specific.xml ]; then
-  echo >> $PRJCONF
-  echo "# %{device}-specific content:" >> $PRJCONF
-  cat prjconf/device-specific.xml >> $PRJCONF
+mkdir -p $DESTDIR
+
+if [ grep -q "^Macros:" $SRC_GENERIC/prjconf.xml $SRC_SPECIFIC/prjconf.xml ]; then
+    echo "prjconf.xml must not contain Macros section. Put them to macros.xml"
+    exit -1
+fi
+
+cp -f $SRC_GENERIC/prjconf.xml $DEST
+if [ -e $SRC_SPECIFIC/prjconf.xml ]; then
+    cat $SRC_SPECIFIC/prjconf.xml >> $DEST
+fi
+
+cat $SRC_GENERIC/macros.xml >> $DEST
+if [ -e $SRC_SPECIFIC/macros.xml ]; then
+    cat $SRC_SPECIFIC/macros.xml | grep -v "^Macros:" >> $DEST
 fi
 
 %files
