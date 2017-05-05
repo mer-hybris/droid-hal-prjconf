@@ -14,3 +14,6 @@ Prefer: droid-hal
 # lets make sure we do not conflict with it in builds.
 Ignore: ofono:ofono-configs
 
+# All devices will eventually move to building libsparse and mkbootimg properly:
+Prefer: droid-glibc-tools
+
