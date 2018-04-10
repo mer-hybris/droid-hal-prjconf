@@ -34,8 +34,8 @@ if [ -e $SRC_SPECIFIC/prjconf.xml ]; then
     cat $SRC_SPECIFIC/prjconf.xml >> $DEST
 fi
 
-cat $SRC_GENERIC/macros.xml >> $DEST
 if [ -e $SRC_SPECIFIC/macros.xml ]; then
+    echo "Macros:" >> $DEST
     cat $SRC_SPECIFIC/macros.xml | grep -v "^Macros:" >> $DEST
 fi
 
