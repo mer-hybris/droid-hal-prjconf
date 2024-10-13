@@ -30,7 +30,7 @@ cp -f $SRC_GENERIC/prjconf.inc $DEST
 # Instead of the xml extension the inc extension makes more sense here,
 # support both file extensions.
 for ext in inc xml ; do
-    if [ -e $SRC_SPECIFIC/prjconf.$ext ]; then
+    if [ -f $SRC_SPECIFIC/prjconf.$ext ]; then
         if grep -q "^Macros:" $SRC_SPECIFIC/prjconf.$ext; then
             echo "prjconf.$ext must not contain Macros section. Put them to macros.$ext"
             exit -1
@@ -43,7 +43,7 @@ echo "Macros:" >> $DEST
 cat $SRC_GENERIC/macros.inc >> $DEST
 
 for ext in inc xml ; do
-    if [ -e $SRC_SPECIFIC/macros.$ext ]; then
+    if [ -f $SRC_SPECIFIC/macros.$ext ]; then
         grep -v "^Macros:" $SRC_SPECIFIC/macros.$ext >> $DEST
     fi
 done
