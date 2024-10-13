@@ -40,6 +40,7 @@ for ext in inc xml ; do
 done
 
 echo "Macros:" >> $DEST
+cat $SRC_GENERIC/macros.inc >> $DEST
 
 for ext in inc xml ; do
     if [ -e $SRC_SPECIFIC/macros.$ext ]; then
