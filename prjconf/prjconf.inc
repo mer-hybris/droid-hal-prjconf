@@ -1,3 +1,5 @@
+# -*- Mode: rpm-spec; indent-tabs-mode: nil -*-
+# vim: set filetype=spec:
 # Generic project config section
 
 Prefer: libhybris-libGLESv2
