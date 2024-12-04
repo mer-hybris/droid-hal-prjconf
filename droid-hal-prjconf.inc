@@ -24,20 +24,29 @@ DEST=$DESTDIR/prjconf.xml
 rm -rf %{buildroot}
 mkdir -p $DESTDIR
 
-if [ grep -q "^Macros:" $SRC_GENERIC/prjconf.xml $SRC_SPECIFIC/prjconf.xml ]; then
-    echo "prjconf.xml must not contain Macros section. Put them to macros.xml"
-    exit -1
-fi
+cp -f $SRC_GENERIC/prjconf.inc $DEST
 
-cp -f $SRC_GENERIC/prjconf.xml $DEST
-if [ -e $SRC_SPECIFIC/prjconf.xml ]; then
-    cat $SRC_SPECIFIC/prjconf.xml >> $DEST
-fi
+# The syntax inside the project configuration is not XML but RPM-like.
+# Instead of the xml extension the inc extension makes more sense here,
+# support both file extensions.
+for ext in inc xml ; do
+    if [ -f $SRC_SPECIFIC/prjconf.$ext ]; then
+        if grep -q "^Macros:" $SRC_SPECIFIC/prjconf.$ext; then
+            echo "prjconf.$ext must not contain Macros section. Put them to macros.$ext"
+            exit -1
+        fi
+        cat $SRC_SPECIFIC/prjconf.$ext >> $DEST
+    fi
+done
 
-if [ -e $SRC_SPECIFIC/macros.xml ]; then
-    echo "Macros:" >> $DEST
-    cat $SRC_SPECIFIC/macros.xml | grep -v "^Macros:" >> $DEST
-fi
+echo "Macros:" >> $DEST
+cat $SRC_GENERIC/macros.inc >> $DEST
+
+for ext in inc xml ; do
+    if [ -f $SRC_SPECIFIC/macros.$ext ]; then
+        grep -v "^Macros:" $SRC_SPECIFIC/macros.$ext >> $DEST
+    fi
+done
 
 %files
 %defattr(-,root,root,-)
